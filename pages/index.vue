@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isLoading"
-    class="flex gap-1 bg-gray-900 items-center justify-center text-3xl"
+    class="flex gap-1 min-h-screen bg-gray-900 items-center justify-center text-3xl"
   >
     <span class="text-white font-semibold">
       Carregando...
@@ -11,7 +11,7 @@
   </div>
 
   <template v-else>
-    <section class="flex flex-col bg-gray-900 gap-2">
+    <section class="flex flex-col min-h-screen bg-gray-900 gap-2">
 
       <Header></Header>
       
@@ -87,7 +87,7 @@
               <img
                 :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
                 alt="Movie Poster"
-                class="rounded-xl object-cover w-70 h-70 mb-7"
+                class="rounded-xl object-cover w-70 h-70 mb-8"
               />
             </NuxtLink>
     

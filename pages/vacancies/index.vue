@@ -5,7 +5,11 @@
         <NuxtLink
           v-for="hr in hours"
           :key="hr.id"
-          :class="bg_button_hours"
+          @click="hoursSelected(hr.hour)"
+          :class="[
+            'font-light font-semibold text-lg m-3',
+            hourSelect.includes(hr.hour) ? 'border-b-2 border-white' : 'border-none'
+          ]"
         >
           {{ hr.hour }}
         </NuxtLink>
@@ -16,17 +20,22 @@
       Horários
     </p>
 
-    <div class="flex flex-col items-center text-white">
-      <div class="flex flex-wrap gap-3 m-6">
+    <div class="flex flex-col text-white">
+      <div class="flex flex-wrap gap-3 m-7">
         <div
           v-for="(chair, index) in 36"
             @click="chairSelect(index)"
             :class="[
               'w-12 h-12 rounded-lg flex items-center justify-center cursor-pointer',
               selectedChairs.includes(index) ? 'bg-indigo-400' : 'bg-gray-700'
-            ]"          >
-          <span class="text-sm font-semibold">
-            {{ chair }}
+            ]"
+          >
+          <span v-if="selectedChairs.includes(index)" class="text-sm font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 2048 2048"><path fill="white" d="m1902 196l121 120L683 1657L25 999l121-121l537 537z"/></svg>
+          </span>
+
+          <span v-else class="text-sm font-semibold">
+            C{{ chair }}
           </span>
         </div>
       </div>
@@ -41,9 +50,15 @@
         :key="status.id"
         class="flex gap-3 text-white font-light items-center"
       >
-        <div :class="status.bg">
-          {{ status.value }}
-        </div>  
+        <div>
+          <span v-if="status.title == 'Selecionado'" :class="status.bg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 2048 2048"><path fill="white" d="m1902 196l121 120L683 1657L25 999l121-121l537 537z"/></svg>
+          </span>  
+          <span v-else :class="status.bg">
+            {{ status.value }}
+          </span>  
+        </div>
+
         <p>
           {{ status.title }}
         </p>
@@ -53,12 +68,33 @@
     <div class="flex gap-3 items-start m-3 text-white">
       <div class="flex flex-col gap-1 items-center bg-gray-800 rounded-xl drop-shadow-xl p-3">
         <p>Sala</p>
-        <span>3</span>
+        <span>C</span>
       </div>
 
       <div class="flex flex-col gap-1 items-center bg-gray-800 rounded-xl drop-shadow-xl p-3">
-        <p>Lugar selecionado</p>
-        <span class="font-light">D2, D3</span>
+        <p>
+          Lugar selecionado
+        </p>
+
+        <span v-if="selectedChairs == 0" class="font-light">
+          Nenhum
+        </span>
+        <span v-else class="font-light">
+          C{{ selectedChairs }}
+        </span>
+      </div>
+
+      <div class="flex flex-col gap-1 items-center bg-gray-800 rounded-xl drop-shadow-xl p-3">
+        <p>
+          Horário
+        </p>
+
+        <span v-if="hourSelect == 0" class="font-light">
+          Nenhum
+        </span>
+        <span v-else class="font-light">
+          {{ hourSelect }}
+        </span>
       </div>
     </div>
 
@@ -68,14 +104,19 @@
           type="checkbox"
           class="p-4"
         >
-        <p class="text-light">Comprar bebidas e comidas online</p>
+        <p class="text-light">
+          Comprar bebidas e comidas online
+        </p>
       </div>
     </div>
 
     <div class="flex gap-2 items-center justify-center bg-indigo-400/80 text-white font-semibold px-1 py-2 rounded-full mx-3 mb-25 drop-shadow-xl">
-      <NuxtLink to="/vacancies">
-        R${{ valueTicket }}
+      <NuxtLink
+        to="/payment"
+      >
+        R${{ selectedChairs.length*20 }}
       </NuxtLink>
+
       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 56 56">
         <path fill="white" fill-rule="evenodd"
           d="M7.627 16.697L23.812 5.364a4 4 0 0 1 5.57.982l2.553 3.645q.056.08.107.163zM2.147 29.84L1.04 25.708a4 4 0 0 1 2.83-4.898L44.438 9.94a4 4 0 0 1 4.899 2.828l1.151 4.298a3.2 3.2 0 0 1-1.121 3.35a5.001 5.001 0 0 0 2.433 8.903a3.08 3.08 0 0 1 2.576 2.255l1.172 4.377a4 4 0 0 1-2.828 4.899L12.15 51.72a4 4 0 0 1-4.898-2.828l-1.103-4.118a3.48 3.48 0 0 1 1.16-3.6a5.001 5.001 0 0 0-2.37-8.812a3.46 3.46 0 0 1-2.791-2.52m35.478-6.689a3 3 0 1 0-1.553-5.795a3 3 0 0 0 1.553 5.795m2.07 7.728a3 3 0 1 0-1.552-5.796a3 3 0 0 0 1.553 5.796m2.071 7.727a3 3 0 1 0-1.552-5.795a3 3 0 0 0 1.552 5.795" />
@@ -108,15 +149,11 @@
       hour: '21:30'
     },
   ]);
-
-  const valueTicket = ref(50);
-
-  const bg_button_hours = ref('font-light font-semibold text-lg m-3 border-b-1');
-
+  
   const statusChair = ref([
     {
       id: 0,
-      value: '25',
+      value: '#',
       title: 'Disponível',
       bg: 'w-9 h-9 bg-gray-700 rounded-lg flex items-center justify-center',
     },
@@ -134,9 +171,8 @@
     },
   ]);
 
-
   const selectedChairs = ref([]);
-
+  
   const chairSelect = (index) => {
     if (selectedChairs.value.includes(index)) {
       selectedChairs.value = selectedChairs.value.filter((i) => i !== index);
@@ -144,5 +180,30 @@
       selectedChairs.value.push(index);
     }
   };
+
+
+  const hourSelect = ref([]);
+
+  const hoursSelected = (hour) => {
+    if(hourSelect.value.includes(hour)) {
+      hourSelect.value = hourSelect.value.filter((a) => a !== hour)
+    } else {
+      hourSelect.value.push(hour);
+    }
+  }
+
+
+  // const hourSelect = ref(); 
+
+  // const hoursSelected = (hour) => {
+  //   hourSelect.value = hourSelect.value === hour ? null : hour;
+  // };
+
+  // // Para armazenar apenas uma cadeira selecionada
+  // const selectedChairs = ref(null);
+
+  // const chairSelect = (index) => {
+  //   selectedChairs.value = selectedChairs.value === index ? null : index;
+  // };
 
 </script>

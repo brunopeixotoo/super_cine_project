@@ -7,7 +7,7 @@
     </span>
 
     <div v-if="modalSearch"
-      class="flex flex-col gap-2 bg-indigo-400 rounded-xl m-3 p-4 drop-shadow-xl">
+      class="flex flex-col gap-2 bg-indigo-500 rounded-xl m-3 p-4 drop-shadow-xl">
       <p class="text-white font-light font-semibold">
         O que você está procurando?
       </p>
@@ -22,7 +22,7 @@
 
         <button
           @click="fechSearchMovies"
-          class="bg-indigo-500 rounded-xl text-white font-light p-2 drop-shadow-xl"
+          class="bg-indigo-700 rounded-xl text-white font-light p-2 drop-shadow-xl"
         >
           Pesquisar
         </button>
@@ -65,7 +65,7 @@
   const errorMessage = ref(false);
   const linkPages = ref([
     { id: '0', name: 'Home', path: '/'},
-    { id: '1', name: 'Ingressos', path: '/ticket'},
+    { id: '1', name: 'PopCorn', path: '/ticket'},
     { id: '2', name: 'Perfil', path: '/profile'},
   ]);
 
