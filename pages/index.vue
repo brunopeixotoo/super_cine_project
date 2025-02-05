@@ -23,13 +23,13 @@
         <div
           ref="carouselA"
           class="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide active:cursor-grabbing scroll-smooth"
-          @mousedown="(e) => startDragA(e, $refs.carouselA)"
-          @mousemove="(e) => onDragA(e, $refs.carouselA)"
-          @mouseup="() => stopDragA($refs.carouselA)"
-          @mouseleave="() => stopDragA($refs.carouselA)"
-          @touchstart="(e) => startDragA(e, $refs.carouselA)"
-          @touchmove="(e) => onDragA(e, $refs.carouselA)"
-          @touchend="() => stopDragA($refs.carouselA)"      
+          @mousedown="startDragA(e)"
+          @mousemove="onDragA(e, $refs.carouselA)"
+          @mouseup="stopDragA"
+          @mouseleave="stopDragA"
+          @touchstart="startDragA(e)"
+          @touchmove="onDragA(e, $refs.carouselA)"
+          @touchend="stopDragA"      
         >
           <div
             v-for="movie in movies"
@@ -68,13 +68,13 @@
         <div
           ref="carouselB"
           class="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide active:cursor-grabbing scroll-smooth"
-          @mousedown="(e) => startDragB(e, $refs.carouselB)"
-          @mousemove="(e) => onDragB(e, $refs.carouselB)"
-          @mouseup="() => stopDragB($refs.carouselB)"
-          @mouseleave="() => stopDragB($refs.carouselB)"
-          @touchstart="(e) => startDragB(e, $refs.carouselB)"
-          @touchmove="(e) => onDragB(e, $refs.carouselB)"
-          @touchend="() => stopDragB($refs.carouselB)"   
+          @mousedown="startDragB(e)"
+          @mousemove="onDragB(e, $refs.carouselB)"
+          @mouseup="stopDragB"
+          @mouseleave="stopDragB"
+          @touchstart="startDragB(e)"
+          @touchmove="onDragB(e, $refs.carouselB)"
+          @touchend="stopDragB"   
         >
           <div
             v-for="movie in imdbBest"
@@ -87,7 +87,7 @@
               <img
                 :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
                 alt="Movie Poster"
-                class="rounded-xl object-cover w-70 h-70 mb-8"
+                class="rounded-xl object-cover w-70 h-70"
               />
             </NuxtLink>
     
@@ -95,7 +95,7 @@
               IMDb {{ movie.vote_average.toFixed(1) }}
             </span>
     
-            <div class="flex gap-1 text-white text-sm font-light font-semibold">
+            <div class="flex gap-1 text-white text-sm font-light font-semibold mb-15">
               <p class="text-sm">
                 {{ movie.title }}
               </p>
@@ -147,53 +147,68 @@
 
 
 
-  const isDraggingA = ref(false);
-  const startX_A = ref(0);
-  const scrollLeft_A = ref(0);
-  const carouselA = ref(null);
+  let isDraggingA = false;
+  let startX_A = 0;
+  let startY_A = 0;
+  
+  const startDragA = (e) => {
+    isDraggingA = true;
+    startX_A = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    startY_A = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+  };
 
-  const isDraggingB = ref(false);
-  const startX_B = ref(0);
-  const scrollLeft_B = ref(0);
+  const onDragA = (e, carousel) => {
+    if (!isDraggingA) return;
+
+    const currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const currentY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+    const diffX = currentX - startX_A;
+    const diffY = currentY - startY_A;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      e.preventDefault();
+      carousel.scrollLeft -= diffX;
+      startX_A = currentX;
+    }
+  };
+
+  const stopDragA = () => {
+    isDraggingA = false;
+  };
+  
+  
+
+
+  let isDraggingB = false;
+  let startX_B = 0;
+  let startY_B = 0;
   const carouselB = ref(null);
 
-  
-  function startDragA(e) {
-    isDraggingA.value = true;
-    startX_A.value = e.touches ? e.touches[0].pageX : e.pageX;
-    scrollLeft_A.value = carouselA.value.scrollLeft;
-  }
+  const startDragB = (e) => {
+    isDraggingB = true;
+    startX_B = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    startY_B = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+  };
 
-  function onDragA(e) {
-    if (!isDraggingA.value) return;
-    e.preventDefault();
-    const x = e.touches ? e.touches[0].pageX : e.pageX;
-    const walk = (x - startX_A.value) * 1.5; 
-    carouselA.value.scrollLeft = scrollLeft_A.value - walk;
-  }
+  const onDragB = (e, carousel) => {
+    if (!isDraggingB) return;
 
-  function stopDragA() {
-    isDraggingA.value = false;
-  }
+    const currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const currentY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
 
-  
+    const diffX = currentX - startX_B;
+    const diffY = currentY - startY_B;
 
-  function startDragB(e) {
-    isDraggingB.value = true;
-    startX_B.value = e.touches ? e.touches[0].pageX : e.pageX;
-    scrollLeft_B.value = carouselB.value.scrollLeft;
-  }
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      e.preventDefault();
+      carousel.scrollLeft -= diffX;
+      startX_B = currentX;
+    }
+  };
 
-  function onDragB(e) {
-    if (!isDraggingB.value) return;
-    e.preventDefault();
-    const x = e.touches ? e.touches[0].pageX : e.pageX;
-    const walk = (x - startX_B.value) * 1.5; 
-    carouselB.value.scrollLeft = scrollLeft_B.value - walk;
-  }
-
-  function stopDragB() {
-    isDraggingB.value = false;
-  }
+  const stopDragB = () => {
+    isDraggingB = false;
+  };
 
 </script>

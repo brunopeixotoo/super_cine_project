@@ -21,9 +21,9 @@
     </p>
 
     <div class="flex flex-col text-white">
-      <div class="flex flex-wrap gap-3 m-7">
+      <div class="flex flex-wrap gap-3 m-10">
         <div
-          v-for="(chair, index) in 36"
+          v-for="(chair, index) in 35"
             @click="chairSelect(index)"
             :class="[
               'w-12 h-12 rounded-lg flex items-center justify-center cursor-pointer',
@@ -153,7 +153,7 @@
   const statusChair = ref([
     {
       id: 0,
-      value: '#',
+      value: 'Nª',
       title: 'Disponível',
       bg: 'w-9 h-9 bg-gray-700 rounded-lg flex items-center justify-center',
     },

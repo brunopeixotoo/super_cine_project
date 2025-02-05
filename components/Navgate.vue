@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="flex bg-gray-800 rounded-xl drop-shadow-xl m-3">
+    <div class="flex bg-gray-800 rounded-xl drop-shadow-xl m-3 border-1 border-gray-900">
       <div class="flex justify-between text-white w-full">
         <NuxtLink
           v-for="link in linkPages"
