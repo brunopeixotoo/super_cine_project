@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="flex bg-gray-800 rounded-xl drop-shadow-xl m-3 border-1 border-gray-900">
+    <div class="flex bg-gray-800 rounded-xl drop-shadow-xl m-3 border-1 border-gray-500/50">
       <div class="flex justify-between text-white w-full">
         <NuxtLink
           v-for="link in linkPages"
@@ -65,7 +65,7 @@
   const errorMessage = ref(false);
   const linkPages = ref([
     { id: '0', name: 'Home', path: '/'},
-    { id: '1', name: 'PopCorn', path: '/ticket'},
+    { id: '1', name: 'PopCorn', path: '/premises'},
     { id: '2', name: 'Perfil', path: '/profile'},
   ]);
 

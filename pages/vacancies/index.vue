@@ -21,12 +21,12 @@
     </p>
 
     <div class="flex flex-col text-white">
-      <div class="flex flex-wrap gap-3 m-10">
+      <div class="flex flex-wrap gap-3 m-1">
         <div
           v-for="(chair, index) in 35"
             @click="chairSelect(index)"
             :class="[
-              'w-12 h-12 rounded-lg flex items-center justify-center cursor-pointer',
+              'flex items-center justify-center w-12 h-12 rounded-lg cursor-pointer',
               selectedChairs.includes(index) ? 'bg-indigo-400' : 'bg-gray-700'
             ]"
           >
@@ -38,7 +38,7 @@
             C{{ chair }}
           </span>
         </div>
-      </div>
+      </div>  
       <p class="flex items-center justify-center text-lg text-white">
         Cadeiras
       </p>
@@ -112,7 +112,7 @@
 
     <div class="flex gap-2 items-center justify-center bg-indigo-400/80 text-white font-semibold px-1 py-2 rounded-full mx-3 mb-25 drop-shadow-xl">
       <NuxtLink
-        to="/payment"
+        to="/premises"
       >
         R${{ selectedChairs.length*20 }}
       </NuxtLink>
@@ -191,19 +191,5 @@
       hourSelect.value.push(hour);
     }
   }
-
-
-  // const hourSelect = ref(); 
-
-  // const hoursSelected = (hour) => {
-  //   hourSelect.value = hourSelect.value === hour ? null : hour;
-  // };
-
-  // // Para armazenar apenas uma cadeira selecionada
-  // const selectedChairs = ref(null);
-
-  // const chairSelect = (index) => {
-  //   selectedChairs.value = selectedChairs.value === index ? null : index;
-  // };
 
 </script>

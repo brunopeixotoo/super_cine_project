@@ -126,25 +126,11 @@
 
     } catch (error) {
       console.error("Erro ao buscar filmes", error);
+      navigateTo('/');
     }
   };
 
   onMounted(fetchMovies);
-
-
-  const amount = ref(false);
-  const vacancies = ref('38');
-
-  function amountVacancies() {
-    if (vacancies >= '38') {
-      amount.value = false;
-    } else {
-      amount.value = amount;
-    }
-  }
-
-  amountVacancies()
-
 
 
   let isDraggingA = false;

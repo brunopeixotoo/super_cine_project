@@ -11,7 +11,7 @@
       </NuxtLink>
     </div>
 
-    <form class="max-w-3xl mx-auto bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5">
+    <form class="max-w-3xl mx-auto bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20">
       <h2 class="text-2xl font-semibold text-center">
         Dados do Pagamento
       </h2>
@@ -33,6 +33,7 @@
           <label class="block mb-1">
             CPF
           </label>
+
           <input
             v-model="cpf"
             placeholder="000.000.000-00"
@@ -59,11 +60,14 @@
           Formas de Pagamento
         </p>
         
-        <div class="flex justify-around gap-2">
+        <div class="flex justify-around gap-4">
           <button
             v-for="(method, index) in paymentMethods"
             :key="index"
-            :class="['px-4 py-2 rounded-lg transition-all', selectedPayment === method ? 'bg-indigo-500 text-white' : 'bg-gray-600 hover:bg-indigo-400']"
+            :class="[
+              'px-4 py-2 rounded-lg transition-all',
+               selectedPayment === method ? 'bg-indigo-500 text-white' : 'bg-gray-600 hover:bg-indigo-400'
+            ]"
             @click.prevent="selectPayment(method)"
           >
             {{ method }}
@@ -73,7 +77,7 @@
 
       <button
         type="submit"
-        class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white text-lg font-semibold transition-all"
+        class="w-full py-3 mt-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white text-lg font-semibold transition-all"
       >
         Confirmar Pagamento
       </button>
