@@ -2,7 +2,7 @@
     <section class="p-1">
       <div class="flex justify-between bg-gray-800 rounded-xl drop-shadow-xl m-3">
         <div class="flex items-center text-white">
-          <NuxtLink class="font-mono text-4xl m-3" to="/">
+          <NuxtLink class="italic font-semibold text-4xl m-3" to="/">
             Moov
           </NuxtLink>
         </div>

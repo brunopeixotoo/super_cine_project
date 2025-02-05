@@ -16,7 +16,7 @@
         <img
           :src="`https://image.tmdb.org/t/p/w500${moviesDetails.poster_path}`"
           alt="Movie Poster"
-          class="w-full h-150 object-cover opacity-90 fixed top-0 left-0 right-0 z-0 transition-opacity duration-500"
+          class="w-full h-150 object-cover fixed top-0 left-0 right-0 z-0 transition-opacity duration-500"
         />
 
         <NuxtLink class=" flex items-center absolute top-5 left-5" to="/">
