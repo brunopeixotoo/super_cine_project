@@ -2,7 +2,7 @@
   <section class="flex flex-col gap-10 p-4 min-h-screen bg-gray-900 text-white">
     <form
       @submit.prevent="validatorLogin"  
-      class="flex flex-col gap-3 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20"
+      class="flex flex-col gap-6 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20"
     >
       <div class="flex flex-col items-center justify-center">
         <h2 class="font-mono text-3xl font-semibold text-center">
@@ -48,9 +48,13 @@
           Não é cadastrado?
         </p>
 
-        <a class="text-blue-500 underline" target="_blank">
+        <NuxtLink
+          class="text-blue-500 underline"
+          target="_blank"
+          to="/register"  
+        >
           Clique aqui
-        </a>
+        </NuxtLink>
       </div>
 
       <button
@@ -61,7 +65,7 @@
       </button>
 
       <div v-if="errorLogin" class="flex items-start bg-red-500 rounded-xl p-2">
-        <span class="text-white font-light">
+        <span class="text-white">
           Ops! Nome de usuário ou senha incorretos.
         </span>
       </div>

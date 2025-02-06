@@ -12,7 +12,7 @@
       </NuxtLink>
     </div>
 
-    <div class="flex flex-col bg-gray-800 text-white mt-12 m-4 rounded-xl p-4">
+    <div class="flex flex-col bg-gray-800 text-white mt-12 m-5 rounded-xl p-4">
       <h2 class="text-2xl font-semibold text-center my-3">
         PopCorn Moov
       </h2>

@@ -38,7 +38,12 @@
             C{{ index }}
           </span>
         </div>
-      </div>  
+      </div>
+
+      <div class="flex items-center justify-center rounded-lg bg-gray-800 text-sm">
+        <p>Tela</p>
+      </div>
+  
       <p class="flex items-center justify-center text-lg text-white">
         Cadeiras
       </p>
