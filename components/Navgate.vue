@@ -109,7 +109,7 @@
 
     setTimeout(() => {
       errorMessage.value = false;
-    }, 2000);
+    }, 3000);
   };
 
 </script>
