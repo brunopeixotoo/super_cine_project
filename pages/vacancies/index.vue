@@ -5,10 +5,10 @@
         <NuxtLink
           v-for="hr in hours"
           :key="hr.id"
-          @click="hoursSelected(hr.hour)"
+          @click="hourSelected(hr.hour)"
           :class="[
             'font-light font-semibold text-lg m-3',
-            hourSelect.includes(hr.hour) ? 'border-b-2 border-white' : 'border-none'
+            hourSelect === hr.hour ? 'border-b-2 border-white' : ''
           ]"
         >
           {{ hr.hour }}
@@ -20,8 +20,8 @@
       Horários
     </p>
 
-    <div class="flex flex-col text-white">
-      <div class="flex flex-wrap gap-3 m-1">
+    <div class="flex flex-col text-white m-auto gap-3">
+      <div class="flex flex-wrap gap-2 m-2">
         <div
           v-for="(chair, index) in 35"
             @click="chairSelect(index)"
@@ -35,7 +35,7 @@
           </span>
 
           <span v-else class="text-sm font-semibold">
-            C{{ chair }}
+            C{{ index }}
           </span>
         </div>
       </div>  
@@ -76,11 +76,11 @@
           Lugar selecionado
         </p>
 
-        <span v-if="selectedChairs == 0" class="font-light">
+        <span v-if="selectedChairs < 0" class="font-light">
           Nenhum
         </span>
         <span v-else class="font-light">
-          C{{ selectedChairs }}
+          C{{ selectedChairs.join(", C") }}
         </span>
       </div>
 
@@ -89,7 +89,7 @@
           Horário
         </p>
 
-        <span v-if="hourSelect == 0" class="font-light">
+        <span v-if="!hourSelect " class="font-light">
           Nenhum
         </span>
         <span v-else class="font-light">
@@ -101,6 +101,8 @@
     <div class="flex gap-3 items-center m-3 text-white">
       <div class="flex gap-2 items-center bg-gray-800 rounded-xl drop-shadow-xl p-3">
         <input
+          v-model="isChecked"
+          @click="updateRoute"
           type="checkbox"
           class="p-4"
         >
@@ -110,22 +112,31 @@
       </div>
     </div>
 
-    <div class="flex gap-2 items-center justify-center bg-indigo-400/80 text-white font-semibold px-1 py-2 rounded-full mx-3 mb-25 drop-shadow-xl">
-      <NuxtLink
-        to="/premises"
-      >
+    <NuxtLink
+      class="flex gap-2 items-center justify-center bg-indigo-400/80 text-white font-semibold px-1 py-3 rounded-full mx-3 mb-25 drop-shadow-xl"
+      :to="{
+        path: nextPage, 
+        query: { chairs: JSON.stringify(selectedChairs), total: selectedChairs.length * 20 }
+      }"
+    >
+      <p>
         R${{ selectedChairs.length*20 }}
-      </NuxtLink>
+      </p>
 
       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 56 56">
         <path fill="white" fill-rule="evenodd"
           d="M7.627 16.697L23.812 5.364a4 4 0 0 1 5.57.982l2.553 3.645q.056.08.107.163zM2.147 29.84L1.04 25.708a4 4 0 0 1 2.83-4.898L44.438 9.94a4 4 0 0 1 4.899 2.828l1.151 4.298a3.2 3.2 0 0 1-1.121 3.35a5.001 5.001 0 0 0 2.433 8.903a3.08 3.08 0 0 1 2.576 2.255l1.172 4.377a4 4 0 0 1-2.828 4.899L12.15 51.72a4 4 0 0 1-4.898-2.828l-1.103-4.118a3.48 3.48 0 0 1 1.16-3.6a5.001 5.001 0 0 0-2.37-8.812a3.46 3.46 0 0 1-2.791-2.52m35.478-6.689a3 3 0 1 0-1.553-5.795a3 3 0 0 0 1.553 5.795m2.07 7.728a3 3 0 1 0-1.552-5.796a3 3 0 0 0 1.553 5.796m2.071 7.727a3 3 0 1 0-1.552-5.795a3 3 0 0 0 1.552 5.795" />
       </svg>
-    </div>
+    </NuxtLink>
   </section>
 </template>
 
 <script setup>
+
+  const hourSelect = ref(null);
+  const selectedChairs = ref([]);
+  const nextPage = ref('/payment');
+
 
   const hours = ref([
     {
@@ -171,8 +182,8 @@
     },
   ]);
 
-  const selectedChairs = ref([]);
   
+
   const chairSelect = (index) => {
     if (selectedChairs.value.includes(index)) {
       selectedChairs.value = selectedChairs.value.filter((i) => i !== index);
@@ -181,15 +192,13 @@
     }
   };
 
+  function hourSelected(hour) {
+    hourSelect.value = hour;
+  };
 
-  const hourSelect = ref([]);
+  const updateRoute = () => {
+    nextPage.value = '/premises';
+  };
 
-  const hoursSelected = (hour) => {
-    if(hourSelect.value.includes(hour)) {
-      hourSelect.value = hourSelect.value.filter((a) => a !== hour)
-    } else {
-      hourSelect.value.push(hour);
-    }
-  }
 
 </script>

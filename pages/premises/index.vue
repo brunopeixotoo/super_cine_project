@@ -1,7 +1,10 @@
 <template>
   <section class="flex flex-col gap-5 min-h-screen bg-gray-900">
     <div class="relative">
-      <NuxtLink class="flex items-center absolute top-5 left-5" to="/vacancies">
+      <NuxtLink
+        class="flex items-center absolute top-5 left-5"
+        to="/vacancies"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
           <path fill="white"
             d="m3.55 12l7.35 7.35q.375.375.363.875t-.388.875t-.875.375t-.875-.375l-7.7-7.675q-.3-.3-.45-.675T.825 12t.15-.75t.45-.675l7.7-7.7q.375-.375.888-.363t.887.388t.375.875t-.375.875z" />
@@ -41,11 +44,11 @@
           </div>
         </div>
 
-        <div class="flex gap-3 items-center text-xl p-2">
+        <div class="flex gap-5 items-center text-xl p-2">
           <button @click="removeFood(index)"> - </button>
           
           <p>
-            {{ numberFood }}
+            {{ food.quantity }}
           </p>
           
           <button @click="addFood(index)"> + </button>
@@ -80,11 +83,11 @@
           </div>
         </div>
 
-        <div class="flex gap-3 items-center text-xl p-2">
+        <div class="flex gap-5 items-center text-xl p-2">
           <button @click="removeDrink(i)"> - </button>
           
           <p>
-            {{ numberDrink }}
+            {{ drink.quantity }}
           </p>
           
           <button @click="addDrink(i)"> + </button>
@@ -92,19 +95,22 @@
       </div>
     </div>
 
-    <button class="flex gap-2 items-center justify-center bg-indigo-400/80 text-white font-semibold px-1 py-3 rounded-full mx-3 mb-25 drop-shadow-xl">
-      <NuxtLink
-        to="/payment"
-      >
-        R${{ storeOrder.length*10 }}
-      </NuxtLink>
-    </button>
+    <NuxtLink
+      class="flex gap-2 items-center justify-center bg-indigo-400/80 text-white font-semibold px-1 py-3 rounded-full mx-3 mb-25 drop-shadow-xl"
+      to="/payment"
+    >
+      R${{ totalPayment }}
+    </NuxtLink>
   </section>
 </template>
 
 <script setup>
-  const numberFood = ref(0);
-  const numberDrink = ref(0);
+
+  const route = useRoute();
+  // const selectedChairs = JSON.parse(route.query.chairs || '[]');
+  const totalTickets = route.query.total || 0;
+  const totalPopCorn = ref(0);
+  const totalPayment = computed(() => Number(totalTickets) + totalPopCorn.value);
   const storeOrder = ref([]);
 
   
@@ -114,36 +120,42 @@
       title: 'Pipoca',
       description: 'Tamanho: Grande',
       value: 20,
+      quantity: 0,
     },
     {
       id: 1,
       title: 'Pipoca',
       description: 'Tamanho: Média',
       value: 15,
+      quantity: 0,
     },
     {
       id: 2,
       title: 'Pipoca',
       description: 'Tamanho: Pequena',
       value: 10,
+      quantity: 0,
     },
     {
       id: 3,
       title: 'HotDog',
       description: 'Tamanho: 10cm',
       value: 17,
+      quantity: 0,
     },
     {
       id: 4,
       title: 'Chocolate Garoto',
       description: 'Tamanho: 260g',
       value: 6,
+      quantity: 0,
     },
     {
       id: 5,
       title: 'Chocolate Lacta',
       description: 'Tamanho: 240g',
       value: 8,
+      quantity: 0,
     },
   ])
   
@@ -153,30 +165,35 @@
       title: 'Coca-Cola Lata',
       description: 'Tamanho: 350ml',
       value: 5,
+      quantity: 0,
     },
     {
       id: 7,
       title: 'Coca-Cola',
       description: 'Tamanho: 610ml',
       value: 8,
+      quantity: 0,
     },
     {
       id: 8,
       title: 'Guaraná-Antartica',
       description: 'Tamanho: 350ml',
       value: 5,
+      quantity: 0,
     },
     {
       id: 9,
       title: 'Pepsi',
       description: 'Tamanho: 350ml',
       value: 5,
+      quantity: 0,
     },
     {
       id: 10,
       title: 'Fanta Laranja',
       description: 'Tamanho: 350ml',
       value: 4,
+      quantity: 0,
     },
   ]);
 
@@ -187,7 +204,7 @@
       storeOrder.value.push(food);
     } else {
       storeOrder.value.splice(index, 1);
-    }
+    };
   };
 
   const toggleDrinkProduct = (drink) => {
@@ -196,41 +213,45 @@
       storeOrder.value.push(drink);
     } else {
       storeOrder.value.splice(index, 1);
-    }
+    };
   };
 
   
   function removeFood(index) {
-    if(numberFood.value == 0) {
-      numberFood.value == 0;
+    if (storeFoods.value[index].quantity <= 0) {
+      storeFoods.value[index].quantity = 0;
     } else {
-      numberFood.value = numberFood.value - 1;
-    }
+      storeFoods.value[index].quantity -= 1;
+      totalPopCorn.value -= storeFoods.value[index].value
+    };
   };
 
   function addFood(index) {
-    if(numberFood.value >= 10 ) {
-      numberFood.value == 10;
+    if(storeFoods.value[index].quantity >= 10 ) {
+      storeFoods.value[index].quantity = 10;
     } else {
-      numberFood.value = numberFood.value + 1;
-    }
-  }
+      storeFoods.value[index].quantity += 1;
+      totalPopCorn.value += storeFoods.value[index].value
+    };
+  };
 
 
   function removeDrink(index) {
-    if(numberDrink.value == 0) {
-      numberDrink.value == 0;
+    if(storeDrinks.value[index].quantity <= 0) {
+      storeDrinks.value[index].quantity = 0;
     } else {
-      numberDrink.value = numberDrink.value - 1;
-    }
+      storeDrinks.value[index].quantity -= 1;
+      totalPopCorn.value -= storeDrinks.value[index].value
+    };
   };
 
   function addDrink(index) {
-    if(numberDrink.value >= 10 ) {
-      numberDrink.value == 10;
+    if(storeDrinks.value[index].quantity >= 10 ) {
+      storeDrinks.value[index].quantity = 10;
     } else {
-      numberDrink.value = numberDrink.value + 1;
-    }
-  }
+      storeDrinks.value[index].quantity += 1;
+      totalPopCorn.value += storeDrinks.value[index].value
+    };
+  };
 
 </script>

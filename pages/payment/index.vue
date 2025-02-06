@@ -11,7 +11,7 @@
       </NuxtLink>
     </div>
 
-    <form class="max-w-3xl mx-auto bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20">
+    <form class="flex flex-col gap-5 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20">
       <h2 class="text-2xl font-semibold text-center">
         Dados do Pagamento
       </h2>
