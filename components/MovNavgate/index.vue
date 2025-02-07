@@ -7,7 +7,7 @@
     </span>
 
     <div v-if="modalSearch"
-      class="flex flex-col gap-2 bg-indigo-500 rounded-xl m-3 p-4 drop-shadow-xl">
+      class="flex flex-col fixed bottom-18 left-0 right-0 z-50 gap-2 bg-indigo-500 rounded-xl m-3 p-4 drop-shadow-xl">
       <p class="text-white font-light font-semibold">
         O que você está procurando?
       </p>
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="flex bg-gray-800 rounded-xl drop-shadow-xl m-3">
+    <div class="flex fixed bottom-0 left-0 right-0 z-50 bg-gray-800 rounded-xl drop-shadow-xl m-3">
       <div class="flex justify-between text-white w-full">
         <NuxtLink
           v-for="link in linkPages"
@@ -38,7 +38,7 @@
           class="m-5"
         >
           {{ link.icon }}
-          <p class="text-sm">
+          <p class="text-base">
             {{ link.name }}
           </p>
         </NuxtLink>

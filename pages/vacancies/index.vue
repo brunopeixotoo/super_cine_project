@@ -1,6 +1,6 @@
 <template>
   <section class="flex flex-col gap-3 p-1 min-h-screen bg-gray-900">
-    <div class="flex flex-col bg-gray-800 rounded-xl drop-shadow-xl m-3 p-2">
+    <MovCard>
       <div class="flex justify-between text-white w-full">
         <NuxtLink
           v-for="hr in hours"
@@ -14,7 +14,7 @@
           {{ hr.hour }}
         </NuxtLink>
       </div>
-    </div>
+    </MovCard>
 
     <p class="flex items-center justify-center text-lg text-white">
       Horários
@@ -118,7 +118,7 @@
     </div>
 
     <NuxtLink
-      class="flex gap-2 items-center justify-center bg-indigo-400/80 text-white font-semibold px-1 py-3 rounded-full mx-3 mb-25 drop-shadow-xl"
+      class="flex gap-2 items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-1 py-3 rounded-xl mx-3 mb-25 drop-shadow-xl"
       :to="{
         path: nextPage, 
         query: { chairs: JSON.stringify(selectedChairs), total: selectedChairs.length * 20 }
@@ -134,13 +134,13 @@
       </svg>
     </NuxtLink>
 
-    <Navgate  
-      class="fixed bottom-0 left-0 right-0 z-50"
-    />
+    <MovNavgate />
   </section>
 </template>
 
 <script setup>
+import { MovNavgate } from '#components';
+
 
   const hourSelect = ref(null);
   const selectedChairs = ref([]);

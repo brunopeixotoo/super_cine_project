@@ -33,36 +33,43 @@
           <input
             v-model="password"
             placeholder="Digite sua senha"
-            type="text"
+            type="password"
             class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
-
-          <p class="font-light underline" target="_blank">
+        </div>
+      </div>
+      
+      <div class="flex flex-col gap-3 font-light items-center justify-center">
+        <div class="flex gap-1">
+          <p class="font-light">
             Esqueceu sua senha?
           </p>
+
+          <NuxtLink
+            class="text-blue-500 underline"
+            to="/register"  
+          >
+            Clique aqui
+          </NuxtLink>
+        </div>
+
+        <div class="flex gap-1">
+          <p>
+            Não é cadastrado?
+          </p>
+          
+          <NuxtLink
+            class="text-blue-500 underline"
+            to="/register"  
+          >
+            Clique aqui
+          </NuxtLink>
         </div>
       </div>
 
-      <div class="flex gap-2 font-light items-center justify-center">
-        <p>
-          Não é cadastrado?
-        </p>
-
-        <NuxtLink
-          class="text-blue-500 underline"
-          target="_blank"
-          to="/register"  
-        >
-          Clique aqui
-        </NuxtLink>
-      </div>
-
-      <button
-        type="submit"
-        class="w-full py-3 mt-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white text-lg font-semibold transition-all"
-      >
-        Entrar
-      </button>
+      <MovButton
+        label="Entrar"
+      />
 
       <div v-if="errorLogin" class="flex items-start bg-red-500 rounded-xl p-2">
         <span class="text-white">
@@ -73,7 +80,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
   const name = ref('');
   const password = ref('');

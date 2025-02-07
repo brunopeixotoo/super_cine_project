@@ -13,7 +13,7 @@
 
     <form
       @submit.prevent="validatorRegister"
-      class="flex flex-col gap-3 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20"
+      class="flex flex-col gap-3 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-15"
     >
       <h2 class="text-2xl font-semibold text-center">
         Moov - Cadastro
@@ -100,17 +100,27 @@
           <input
             v-model="numberHouse"
             type="number"
+            placeholder="Ex: 123"
+            class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block mb-1">
+            Senha
+          </label>
+
+          <input
+            v-model="password"
+            type="password"
             class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
       </div>
 
-      <button
-        type="submit"
-        class="w-full py-3 mt-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white text-lg font-semibold transition-all"
-      >
-        Registrar
-      </button>
+      <MovButton
+        label="Registrar"
+      />
 
       <div v-if="errorRegister" class="flex items-start bg-red-500 rounded-xl p-2">
         <span class="text-white">
@@ -125,9 +135,7 @@
       </div>
     </form>
 
-    <Navgate  
-      class="fixed bottom-0 left-0 right-0 z-50"
-    />
+    <MovNavgate />
   </section>
 </template>
 
@@ -140,6 +148,7 @@
   const numberHouse = ref('');
   const cep = ref('')
   const neighborhood = ref('');
+  const password = ref('');
 
   const errorRegister = ref(false);
   const confirmRegister = ref(false);
@@ -154,9 +163,10 @@
       email.value &&
       numberHouse.value &&
       cep.value &&
-      neighborhood.value
+      neighborhood.value &&
+      password.value
     ) {
-      modalConfirmRegister()
+      modalConfirmRegister();
 
     } else {
       modalErrorRegister();
@@ -167,6 +177,7 @@
       email.value = '';
       numberHouse.value = '';
       neighborhood.value = '';
+      password.value = '';
     };
   };
 
@@ -185,7 +196,7 @@
         confirmRegister.value = false;
         navigateTo('/');
       }, 3000);
-  }
+  };
 
 
 </script>

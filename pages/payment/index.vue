@@ -13,7 +13,7 @@
 
     <form class="flex flex-col gap-5 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20">
       <h2 class="text-2xl font-semibold text-center">
-        Dados do Pagamento
+        Dados de Pagamento
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -75,17 +75,12 @@
         </div>
       </div>
 
-      <button
-        type="submit"
-        class="w-full py-3 mt-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white text-lg font-semibold transition-all"
-      >
-        Confirmar Pagamento
-      </button>
+      <MovButton
+        label="Confirmar pagamento"
+      />
     </form>
 
-    <Navgate  
-      class="fixed bottom-0 left-0 right-0 z-50"
-    />
+    <MovNavgate />
   </section>
 </template>
 

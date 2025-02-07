@@ -12,7 +12,7 @@
       </NuxtLink>
     </div>
 
-    <div class="flex flex-col bg-gray-800 text-white mt-12 m-5 rounded-xl p-4">
+    <div class="flex flex-col gap-4 bg-gray-800 text-white mt-12 mx-5 mb-20 rounded-xl p-3">
       <h2 class="text-2xl font-semibold text-center my-3">
         PopCorn Moov
       </h2>
@@ -23,10 +23,8 @@
       <div
         v-for="(food, index) in storeFoods"
         :key="food.id"
-        @click="toggleFoodProduct(food)"
         :class="[
           'flex gap-3 bg-gray-700 rounded-xl m-3 justify-between p-4',
-          storeOrder.includes(food)
         ]"
         
       >
@@ -63,10 +61,8 @@
       <div
         v-for="(drink, i) in storeDrinks"
         :key="drink.id"
-        @click="toggleDrinkProduct(drink)"
         :class="[
           'flex gap-3 bg-gray-700 rounded-xl m-3 justify-between p-4',
-          storeOrder.includes(drink)
         ]"
       >
         <div class="flex gap-5 items-center">
@@ -93,18 +89,32 @@
           <button @click="addDrink(i)"> + </button>
         </div>
       </div>
+
+      <div class="flex flex-col gap-3 m-3 bg-indigo-600 p-3 rounded-xl">
+        <div class="flex flex-col gap-2 font-light">
+          <p>
+            Ingresso(s): R${{ totalTickets }}
+          </p>
+          <p>
+            PopCorn: R${{ totalPopCorn }}
+          </p>
+
+          <hr>
+
+          <p>
+            Total: R${{ totalPayment }}
+          </p>
+        </div>
+      </div>
+
+      <MovButton
+        :label="`R$${totalPayment}`"
+        @click="navigateTo('/payment')"
+      />
     </div>
 
-    <NuxtLink
-      class="flex gap-2 items-center justify-center bg-indigo-400/80 text-white font-semibold px-1 py-3 rounded-full mx-3 mb-25 drop-shadow-xl"
-      to="/payment"
-    >
-      R${{ totalPayment }}
-    </NuxtLink>
 
-    <Navgate  
-      class="fixed bottom-0 left-0 right-0 z-50"
-    />
+    <MovNavgate />
   </section>
 </template>
 
@@ -115,7 +125,6 @@
   const totalTickets = route.query.total || 0;
   const totalPopCorn = ref(0);
   const totalPayment = computed(() => Number(totalTickets) + totalPopCorn.value);
-  const storeOrder = ref([]);
 
   
   const storeFoods = ref([
@@ -161,7 +170,7 @@
       value: 8,
       quantity: 0,
     },
-  ])
+  ]);
   
   const storeDrinks = ref([
     {
@@ -200,25 +209,6 @@
       quantity: 0,
     },
   ]);
-
-  
-  const toggleFoodProduct = (food) => {
-    const index = storeOrder.value.findIndex(item => item.id === food.id);
-    if (index === -1) {
-      storeOrder.value.push(food);
-    } else {
-      storeOrder.value.splice(index, 1);
-    };
-  };
-
-  const toggleDrinkProduct = (drink) => {
-    const index = storeOrder.value.findIndex(item => item.id === drink.id);
-    if (index === -1) {
-      storeOrder.value.push(drink);
-    } else {
-      storeOrder.value.splice(index, 1);
-    };
-  };
 
   
   function removeFood(index) {
