@@ -20,119 +20,74 @@
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
-        <div>
-          <label class="block mb-1">
-            Nome completo
-          </label>
-          <input
-            v-model="name"
-            placeholder="Digite seu nome"
-            type="text"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
+        <MovInput
+          v-model="name"
+          label="Nome completo"
+          placeHolder="Digite seu nome completo"
+          type="text"
+        />
 
-        <div>
-          <label class="block mb-1">
-            CPF
-          </label>
+        <MovInput
+          v-model="cpf"
+          label="CPF"
+          placeHolder="000.000.000-00"
+          type="text"
+        />
 
-          <input
-            v-model="cpf"
-            placeholder="000.000.000-00"
-            type="text"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
+        <MovInput
+          v-model="birthday"
+          label="Data de nascimento"
+          placeHolder="00/00/0000"
+          type="date"
+        />
 
-        <div class="md:col-span-2">
-          <label class="block mb-1">
-            Data de nascimento
-          </label>
+        <MovInput
+          v-model="email"
+          label="Email"
+          placeHolder="seuemail@gmail.com"
+          type="email"
+        />
 
-          <input
-            v-model="birthday"
-            type="date"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-        <div class="md:col-span-2">
-          <label class="block mb-1">
-            Email
-          </label>
+        <MovInput
+          v-model="cep"
+          label="CEP"
+          placeHolder="00-000-000"
+          type="number"
+        />
 
-          <input
-            v-model="email"
-            type="email"
-            placeholder="seuemail@gmail.com"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-        <div class="md:col-span-2">
-          <label class="block mb-1">
-            Cep
-          </label>
+        <MovInput
+          v-model="neighborhood"
+          label="Bairro"
+          placeHolder="Ex: Liberdade"
+          type="text"
+        />
 
-          <input
-            v-model="cep"
-            type="number"
-            placeholder="00-000-000"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-        <div class="md:col-span-2">
-          <label class="block mb-1">
-            Bairro
-          </label>
+        <MovInput
+          v-model="numberHouse"
+          label="Número da residência"
+          placeHolder="Ex: 123"
+          type="number"
+        />
 
-          <input
-            v-model="neighborhood"
-            type="text"
-            placeholder="Ex: Liberdade"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-        <div class="md:col-span-2">
-          <label class="block mb-1">
-            Número da residência
-          </label>
-
-          <input
-            v-model="numberHouse"
-            type="number"
-            placeholder="Ex: 123"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-
-        <div class="md:col-span-2">
-          <label class="block mb-1">
-            Senha
-          </label>
-
-          <input
-            v-model="password"
-            type="password"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
+        <MovInput
+          v-model="password"
+          label="Senha"
+          placeHolder="Defina sua senha"
+          type="text"
+        />
       </div>
 
       <MovButton
         label="Registrar"
       />
 
-      <div v-if="errorRegister" class="flex items-start bg-red-500 rounded-xl p-2">
-        <span class="text-white">
-          Cadastro inválido. Preencha todos os campos.
-        </span>
-      </div>
+      <MovError v-if="errorRegister"
+        label="Cadastro inválido. Preencha todos os campos."
+      />
 
-      <div v-if="confirmRegister" class="flex items-start bg-green-500 rounded-xl px-2 py-4">
-        <span class="text-white">
-          Cadastro feito com sucesso!
-        </span>
-      </div>
+      <MovConfirm v-if="confirmRegister"
+        label="Cadastro feito com sucesso!"
+      />
     </form>
 
     <MovNavgate />
@@ -140,6 +95,8 @@
 </template>
 
 <script setup>
+import { MovConfirm } from '#components';
+
 
   const name = ref('');
   const cpf = ref('');

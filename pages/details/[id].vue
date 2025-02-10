@@ -9,7 +9,7 @@
   <template v-else>
     <section class="flex flex-col relative h-screen text-white">
       <div class="relative">
-        <img
+        <NuxtImg
           :src="`https://image.tmdb.org/t/p/w500${moviesDetails.poster_path}`"
           alt="Movie Poster"
           class="w-full h-150 object-cover fixed top-0 left-0 right-0 z-0 transition-opacity duration-500"
@@ -47,6 +47,7 @@
             <p class="text-3xl font-bold">
               {{ moviesDetails.title }}
             </p>
+
             <p class="border border-white text-sm font-mono rounded-lg py-1 px-2 uppercase">
               {{ moviesDetails.original_language }}
             </p>
@@ -66,6 +67,7 @@
           <h3 class="text-lg font-semibold">
             Descrição:
           </h3>
+
           <p class="text-sm font-light leading-relaxed mt-2">
             {{ moviesDetails.overview }}
           </p>

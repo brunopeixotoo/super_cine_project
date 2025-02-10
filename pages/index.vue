@@ -13,37 +13,26 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block mb-1">
-            Nome completo
-          </label>
-          <input
-            v-model="name"
-            placeholder="Digite seu nome de usuário"
-            type="text"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
+        <MovInput
+          v-model="name"
+          label="Nome"
+          place-holder="Nome de usuário"
+          text="text"
+        />
 
-        <div>
-          <label class="block mb-1">
-            Senha
-          </label>
-
-          <input
-            v-model="password"
-            placeholder="Digite sua senha"
-            type="password"
-            class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
+        <MovInput
+          v-model="password"
+          label="Senha"
+          place-holder="Digite sua senha"
+          text="password"
+        />
       </div>
       
       <div class="flex flex-col gap-3 font-light items-center justify-center">
         <div class="flex gap-1">
-          <p class="font-light">
+          <span class="font-light">
             Esqueceu sua senha?
-          </p>
+          </span>
 
           <NuxtLink
             class="text-blue-500 underline"
@@ -54,9 +43,9 @@
         </div>
 
         <div class="flex gap-1">
-          <p>
+          <span>
             Não é cadastrado?
-          </p>
+          </span>
           
           <NuxtLink
             class="text-blue-500 underline"
@@ -71,11 +60,9 @@
         label="Entrar"
       />
 
-      <div v-if="errorLogin" class="flex items-start bg-red-500 rounded-xl p-2">
-        <span class="text-white">
-          Ops! Nome de usuário ou senha incorretos.
-        </span>
-      </div>
+      <MovError v-if="errorLogin"
+        label="Ops! Nome de usuário ou senha incorretos."
+      />
     </form>
   </section>
 </template>

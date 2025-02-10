@@ -1,31 +1,29 @@
 <template>
   <section class="p-1">
-    <span v-if="errorMessage"
-      class="text-white bg-red-600 p-2 rounded-xl m-3"
-    >
-      Ops! Filme não encontrado.
-    </span>
-
+    
     <div v-if="modalSearch"
-      class="flex flex-col fixed bottom-18 left-0 right-0 z-50 gap-2 bg-indigo-500 rounded-xl m-3 p-4 drop-shadow-xl">
+    class="flex flex-col fixed bottom-18 left-0 right-0 z-50 gap-2 bg-indigo-500 rounded-xl m-3 p-4 drop-shadow-xl"
+    >
+      <MovError v-if="errorMessage"
+        label="Ops! Filme não encontrado."
+      />
+
       <p class="text-white font-light font-semibold">
         O que você está procurando?
       </p>
 
-      <div class="flex gap-2">
+      <div class="flex flex-col gap-2">
         <input
           v-model="search"
-          class="rounded-lg bg-white px-4 w-full drop-shadow-xl"
+          class="rounded-lg bg-white px-4 h-11 w-full drop-shadow-xl"
           placeholder="Digite o nome de um filme"
           type="text"
         >
 
-        <button
+        <MovButton
           @click="fechSearchMovies"
-          class="bg-indigo-700 rounded-xl text-white font-light p-2 drop-shadow-xl"
-        >
-          Pesquisar
-        </button>
+          label="Pesquisar"
+        />
       </div>
     </div>
 
@@ -58,11 +56,12 @@
 
   import api from  '@/clients/api';
 
+  const search = ref('');
+  const errorMessage = ref(false);
   const modalSearch = ref(false);
   const listMovies = ref([]);
-  const search = ref('');
   const filterMovies = ref([]);
-  const errorMessage = ref(false);
+
   const linkPages = ref([
     { id: '0', name: 'Home', path: '/home'},
     { id: '1', name: 'PopCorn', path: '/premises'},

@@ -12,7 +12,11 @@
 <script setup lang="ts">
 
   defineProps({
-    label: {
+    label: { // definir o texto exibido para o error
+      type: String,
+      default: '',
+    },
+    defineClass: { // para edições no button
       type: String,
       default: '',
     },

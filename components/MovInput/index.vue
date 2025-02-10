@@ -1,29 +1,29 @@
 <template>
-  <div>
+  <div class="md:col-span-2">
+    <label class="block mb-1">
+      {{ label }}
+    </label>
+
     <input
-      :label="labelClass"
+      class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      :placeholder="placeHolder"
       :type="typeClass"
-      :placeholder="placeholder"
     />
   </div>
 </template>
 
-<script setup>
+<script setup>  
 
   defineProps({
-    title: {
+    label: {
       type: String,
       default: ''
     },
-    labelClass: {
+    placeHolder: {
       type: String,
       default: ''
     },
     typeClass: {
-      type: String,
-      default: ''
-    },
-    placeholder: {
       type: String,
       default: ''
     },
