@@ -16,23 +16,23 @@
         <MovInput
           v-model="name"
           label="Nome"
-          place-holder="Nome de usuário"
-          text="text"
+          placeHolder="Nome de usuário"
+          type="text"
         />
 
         <MovInput
           v-model="password"
           label="Senha"
-          place-holder="Digite sua senha"
-          text="password"
+          placeHolder="Digite sua senha"
+          type="password"
         />
       </div>
       
       <div class="flex flex-col gap-3 font-light items-center justify-center">
         <div class="flex gap-1">
-          <span class="font-light">
+          <p class="font-light">
             Esqueceu sua senha?
-          </span>
+          </p>
 
           <NuxtLink
             class="text-blue-500 underline"

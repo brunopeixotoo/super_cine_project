@@ -7,7 +7,7 @@
     <input
       class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
       :placeholder="placeHolder"
-      :type="typeClass"
+      :type="type"
     />
   </div>
 </template>
@@ -23,7 +23,7 @@
       type: String,
       default: ''
     },
-    typeClass: {
+    type: {
       type: String,
       default: ''
     },
