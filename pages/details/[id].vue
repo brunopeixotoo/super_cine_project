@@ -80,7 +80,8 @@
 </template>
 
 <script setup>
-import api from '@/clients/api';
+  import { NuxtImg } from '#components';
+  import api from '@/clients/api';
 
   const isLoading = ref(true);
 
