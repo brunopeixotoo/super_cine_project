@@ -2,12 +2,12 @@
   <section class="p-1">
     
     <div v-if="modalSearch"
-    class="flex flex-col fixed bottom-18 left-0 right-0 z-50 gap-2 bg-indigo-500 rounded-xl m-3 p-4 drop-shadow-xl"
+    class="flex flex-col fixed bottom-18 left-0 right-0 z-50 gap-2 bg-indigo-400 rounded-xl m-3 p-4 drop-shadow-xl"
     >
       <MovError v-if="errorMessage"
         label="Ops! Filme não encontrado."
       />
-
+      
       <p class="text-white font-light font-semibold">
         O que você está procurando?
       </p>
@@ -19,7 +19,7 @@
           placeholder="Digite o nome de um filme"
           type="text"
         >
-
+        
         <MovButton
           @click="fechSearchMovies"
           label="Pesquisar"

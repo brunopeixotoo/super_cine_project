@@ -6,20 +6,22 @@
 
     <input
       class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      :placeholder="placeHolder"
+      :placeholder="placeholder"
       :type="type"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
 
-<script setup>  
+<script setup>
 
   defineProps({
     label: {
       type: String,
       default: ''
     },
-    placeHolder: {
+    placeholder: {
       type: String,
       default: ''
     },
@@ -27,6 +29,12 @@
       type: String,
       default: ''
     },
+    modelValue: {
+      type: String,
+      default: ''
+    }
   });
+
+  defineEmits(['update:modelValue']);
 
 </script>

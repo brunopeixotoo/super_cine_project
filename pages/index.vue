@@ -9,21 +9,23 @@
           Moov
         </h2>
 
-        <span class="text-gray-300 font-light"> A melhor experiência de cinema </span>
+        <span class="text-gray-300 font-light">
+          A melhor experiência de cinema
+        </span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <MovInput
           v-model="name"
           label="Nome"
-          placeHolder="Nome de usuário"
+          placeholder="Nome de usuário"
           type="text"
         />
-
+        
         <MovInput
           v-model="password"
           label="Senha"
-          placeHolder="Digite sua senha"
+          placeholder="Digite sua senha"
           type="password"
         />
       </div>
@@ -36,7 +38,7 @@
 
           <NuxtLink
             class="text-blue-500 underline"
-            to="/register"  
+            to="/reset"  
           >
             Clique aqui
           </NuxtLink>
@@ -58,6 +60,7 @@
 
       <MovButton
         label="Entrar"
+        type="submit"
       />
 
       <MovError v-if="errorLogin"
@@ -68,6 +71,8 @@
 </template>
 
 <script setup lang="ts">
+
+  console.log(import.meta.env)
 
   const name = ref('');
   const password = ref('');

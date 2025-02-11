@@ -15,64 +15,70 @@
       @submit.prevent="validatorRegister"
       class="flex flex-col gap-3 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-15"
     >
-      <h2 class="text-2xl font-semibold text-center">
-        Moov - Cadastro
+    <div class="flex flex-col items-center justify-center">
+      <h2 class="font-mono text-3xl font-semibold text-center">
+        Moov
       </h2>
+  
+      <span class="text-gray-300 font-light">
+        A melhor experiência de cinema
+      </span>
+    </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
         <MovInput
           v-model="name"
           label="Nome completo"
-          placeHolder="Digite seu nome completo"
+          placeholder="Digite seu nome completo"
           type="text"
         />
 
         <MovInput
           v-model="cpf"
           label="CPF"
-          placeHolder="000.000.000-00"
+          placeholder="000.000.000-00"
           type="text"
         />
 
         <MovInput
           v-model="birthday"
           label="Data de nascimento"
-          placeHolder="00/00/0000"
+          placeholder="00/00/0000"
           type="date"
         />
 
         <MovInput
           v-model="email"
           label="Email"
-          placeHolder="seuemail@gmail.com"
+          placeholder="seuemail@gmail.com"
           type="email"
         />
 
         <MovInput
           v-model="cep"
           label="CEP"
-          placeHolder="00-000-000"
+          placeholder="00-000-000"
           type="number"
         />
 
         <MovInput
           v-model="neighborhood"
           label="Bairro"
-          placeHolder="Ex: Liberdade"
+          placeholder="Ex: Liberdade"
           type="text"
         />
 
         <MovInput
           v-model="numberHouse"
           label="Número da residência"
-          placeHolder="Ex: 123"
+          placeholder="Ex: 123"
           type="number"
         />
 
         <MovInput
           v-model="password"
           label="Senha"
-          placeHolder="Defina sua senha"
+          placeholder="Defina sua senha"
           type="text"
         />
       </div>

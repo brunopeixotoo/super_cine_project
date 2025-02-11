@@ -126,8 +126,7 @@
 
 <script setup>
 
-  import { NuxtImg } from '#components';
-import api from '@/clients/api';
+  import api from '@/clients/api';
 
   const isLoading = ref(true);
   const movies = ref([]);
