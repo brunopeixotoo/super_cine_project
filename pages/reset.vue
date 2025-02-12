@@ -1,8 +1,8 @@
 <template>
-    <section class="flex flex-col gap-10 p-4 min-h-screen bg-gray-900 text-white">
-      <div class="relative">
+    <section class="flex flex-col gap-10 p-4 min-h-screen bg-gray-900 text-white md:flex-row justify-center items-center">
+      <div class="xl:hidden md:hidden">
         <NuxtLink
-          class="flex items-center absolute top-2 left-4"
+          class="flex items-center absolute top-4 left-4"
           to="/"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
@@ -13,7 +13,7 @@
 
       <form
         @submit.prevent="validatorLogin"  
-        class="flex flex-col gap-6 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20"
+        class="flex flex-col gap-6 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20 w-80 md:w-100 h-130"
       >
         <div class="flex flex-col items-center justify-center">
           <h2 class="font-mono text-3xl font-semibold text-center">

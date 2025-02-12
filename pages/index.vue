@@ -1,8 +1,8 @@
 <template>
-  <section class="flex flex-col gap-10 p-4 min-h-screen bg-gray-900 text-white">
+  <section class="flex flex-col gap-10 p-4 min-h-screen bg-gray-900 text-white md:flex-row justify-center items-center">
     <form
       @submit.prevent="validatorLogin"  
-      class="flex flex-col gap-6 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20"
+      class="flex flex-col gap-6 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-20 w-80 xl:w-100"
     >
       <div class="flex flex-col items-center justify-center">
         <h2 class="font-mono text-3xl font-semibold text-center">

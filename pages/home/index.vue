@@ -29,7 +29,7 @@
       </MovCard>
       
       <section class="overflow-hidden mx-5">
-        <p class="flex text-white font-light font-semibold items-start pb-3">
+        <p class="flex text-white font-light font-semibold items-start pb-3 xl:text-xl">
           Em cartaz
         </p>
 
@@ -47,7 +47,7 @@
           <div
             v-for="movie in movies"
             :key="movie.id"
-            class="flex flex-col items-start gap-1 rounded-xl drop-shadow-xl relative w-80 h-full flex-shrink-0 snap-center"
+            class="flex flex-col items-start gap-1 rounded-xl drop-shadow-xl relative w-80 h-full flex-shrink-0 snap-center xl:w-96"
           >
             <NuxtLink
               :to="`/details/${movie.id}`"
@@ -73,8 +73,8 @@
         </div>
       </section>
       
-      <section class="overflow-hidden m-5">
-        <p class="flex text-white font-light font-semibold items-start pb-3">
+      <section class="overflow-hidden m-5 xl:mb-20">
+        <p class="flex text-white font-light font-semibold items-start pb-3 xl:text-xl">
             Recomendado para você
         </p>
 
@@ -92,7 +92,7 @@
           <div
             v-for="movie in imdbBest"
             :key="movie.id"
-            class="flex flex-col items-start gap-1 rounded-xl drop-shadow-xl relative w-50 h-full flex-shrink-0 snap-center"
+            class="flex flex-col items-start gap-1 rounded-xl drop-shadow-xl relative w-50 h-full flex-shrink-0 snap-center xl:w-96"
           >
             <NuxtLink
               :to="`/details/${movie.id}`"
@@ -132,20 +132,21 @@
   const isLoading = ref(true);
   const movies = ref([]);
   const imdbBest = ref([]);
-
+  
   const fetchMovies = async () => {
     try {
       const response = await api.get("/now_playing");
       movies.value = response.data.results;
       isLoading.value = false
-
+      
       imdbBest.value = movies.value.filter(movie => movie.vote_average >= 7.0);
-
+      
     } catch (error) {
       console.error("Erro ao buscar filmes", error);
       navigateTo('/');
     }
   };
+
 
   onMounted(fetchMovies);
 

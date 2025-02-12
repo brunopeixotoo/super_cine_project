@@ -7,16 +7,16 @@
   </div>
 
   <template v-else>
-    <section class="flex flex-col relative h-screen text-white">
+    <section class="flex flex-col relative min-h-screen text-white xl:items-center justify-center">
       <div class="relative">
         <NuxtImg
           :src="`https://image.tmdb.org/t/p/w500${moviesDetails.poster_path}`"
           alt="Movie Poster"
-          class="w-full h-150 object-cover fixed top-0 left-0 right-0 z-0 transition-opacity duration-500"
+          class="w-full h-auto object-cover fixed top-0 left-0 right-0 z-0 transition-opacity duration-500 xl:w-90 h-90"
         />
 
         <NuxtLink
-          class="flex items-center absolute top-5 left-5"
+          class="flex items-center absolute top-5 left-5 md:hidden xl:hidden"
           to="/home"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
@@ -26,7 +26,7 @@
       </div>
 
 
-      <div class="flex flex-col gap-5 relative mt-145 p-6 bg-gray-900 rounded-t-3xl shadow-2xl">
+      <div class="flex flex-col gap-5 relative mt-140 p-6 bg-gray-900 rounded-t-3xl shadow-2xl xl:w-120">
         <div class="flex flex-col gap-3 items-start">
           <div class="flex flex-wrap text-xs gap-2 items-center">
             <div
@@ -68,7 +68,7 @@
             Descrição:
           </h3>
 
-          <p class="text-sm font-light leading-relaxed mt-2">
+          <p class="text-sm text-justify font-light leading-relaxed mt-2">
             {{ moviesDetails.overview }}
           </p>
         </div>

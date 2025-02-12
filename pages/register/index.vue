@@ -1,8 +1,8 @@
 <template>
-  <section class="flex flex-col gap-10 p-4 min-h-screen bg-gray-900 text-white">
-    <div class="relative">
+  <section class="flex flex-col gap-10 p-4 min-h-screen bg-gray-900 text-white xl:flex-row items-center justify-center md:flex-row items-center justify-center">
+    <div class="xl:hidden md:hidden">
       <NuxtLink
-        class="flex items-center absolute top-3 left-3"
+        class="flex items-center absolute top-4 left-4"
         to="/"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
@@ -13,7 +13,7 @@
 
     <form
       @submit.prevent="validatorRegister"
-      class="flex flex-col gap-3 mx-3 bg-gray-800 rounded-2xl p-6 shadow-2xl space-y-6 mt-5 mb-15"
+      class="flex flex-col gap-3 bg-gray-800 rounded-2xl p-6 w-80 shadow-2xl space-y-6 mt-5 mb-15 xl:w-300 h-auto md:w-150 h-auto"
     >
     <div class="flex flex-col items-center justify-center">
       <h2 class="font-mono text-3xl font-semibold text-center">
@@ -25,12 +25,13 @@
       </span>
     </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-7 md:grid-cols-2 gap-7">
         <MovInput
           v-model="name"
           label="Nome completo"
           placeholder="Digite seu nome completo"
           type="text"
+          class="xl:col-span-1 md:col-span-2 col-span-1"
         />
 
         <MovInput
@@ -38,6 +39,7 @@
           label="CPF"
           placeholder="000.000.000-00"
           type="text"
+          class="xl:col-span-1 md:col-span-2 col-span-1"
         />
 
         <MovInput
@@ -45,6 +47,7 @@
           label="Data de nascimento"
           placeholder="00/00/0000"
           type="date"
+          class="xl:col-span-1 md:col-span-2 col-span-1"
         />
 
         <MovInput
@@ -52,6 +55,7 @@
           label="Email"
           placeholder="seuemail@gmail.com"
           type="email"
+          class="xl:col-span-1 md:col-span-2 col-span-1"
         />
 
         <MovInput
@@ -59,6 +63,7 @@
           label="CEP"
           placeholder="00-000-000"
           type="number"
+          class="xl:col-span-1 md:col-span-2 col-span-1"
         />
 
         <MovInput
@@ -66,6 +71,7 @@
           label="Bairro"
           placeholder="Ex: Liberdade"
           type="text"
+          class="xl:col-span-1 md:col-span-2 col-span-1"
         />
 
         <MovInput
@@ -73,6 +79,7 @@
           label="Número da residência"
           placeholder="Ex: 123"
           type="number"
+          class="xl:col-span-1 md:col-span-2 col-span-1"
         />
 
         <MovInput
@@ -80,6 +87,7 @@
           label="Senha"
           placeholder="Defina sua senha"
           type="text"
+          class="xl:col-span-1 md:col-span-2 col-span-1"
         />
       </div>
 
